@@ -60,31 +60,32 @@ if selected == "Data":
         cont2.image(st.session_state.images2,width=100) 
         # print(type(st.session_state.images2[0]))
         # print(len(st.session_state.images2))
-pred = 0
+
 if selected == 'Train':
     if st.button('Train Model'):
+        st.session_state.progress=0
+        st.session_state.my_bar = st.progress(0,"Model Training")
         st.session_state.model = train_model.train()
     if st.session_state.model:
         st.success('Model Trained')
 
-
     
-    col3,col4 = st.columns([1,1])
-    cont3 = col3.container(border=True)
-    cont4 = col4.container(border=True)
-    
-    st.session_state.new_image = cont3.file_uploader('Upload an image to test',accept_multiple_files=False)
-    
-    if st.session_state.new_image:
-            cont3.image(st.session_state.new_image)
-            image = load_img(st.session_state.new_image, target_size=(160, 160))
-            image = img_to_array(image)
-            image = image/255
-            pred = st.session_state.model.predict(image.reshape(1,160,160,3))
-            print(np.argmax(pred))
-            if np.argmax(pred)==0:
-                cont4.write(st.session_state.class1_name)
-                cont4.progress(round(float(pred[0][0]),0),str(round(float(pred[0][0])*100,2)))
-            if np.argmax(pred)==1:
-                cont4.write(st.session_state.class2_name)
-                cont4.progress(float(pred[0][1]),str(round(float(pred[0][1])*100,2)))
+        col3,col4 = st.columns([1,1])
+        cont3 = col3.container(border=True)
+        cont4 = col4.container(border=True)
+        
+        st.session_state.new_image = cont3.file_uploader('Upload an image to test',accept_multiple_files=False)
+        
+        if st.session_state.new_image:
+                cont3.image(st.session_state.new_image)
+                image = load_img(st.session_state.new_image, target_size=(160, 160))
+                image = img_to_array(image)
+                image = image/255
+                pred = st.session_state.model.predict(image.reshape(1,160,160,3))
+                print(np.argmax(pred))
+                if np.argmax(pred)==0:
+                    cont4.write(st.session_state.class1_name)
+                    cont4.progress(round(float(pred[0][0]),0),str(round(float(pred[0][0])*100,2)))
+                if np.argmax(pred)==1:
+                    cont4.write(st.session_state.class2_name)
+                    cont4.progress(round(float(pred[0][1]),0),str(round(float(pred[0][1])*100,2)))

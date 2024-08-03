@@ -4,7 +4,7 @@ from tensorflow.keras.layers import Input
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.preprocessing.image import load_img
 import numpy as np
-from tensorflow.keras import layers,Sequential
+from tensorflow.keras import layers,Sequential,callbacks
 from tensorflow.keras.layers import Flatten,Dense,Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -27,6 +27,14 @@ if 'class1_name' not in st.session_state:
 if 'class2_name' not in st.session_state:
     st.session_state.class2_name=''
 
+class CustomCallback(callbacks.Callback):
+    def on_epoch_end(self, epoch, logs=None):
+       
+        # my_bar.progress(epoch)
+        keys = list(logs.keys())
+        st.session_state.my_bar.progress((epoch+1)*2,'Model Training')
+        print('myprogress is',st.session_state.progress)
+        print("End epoch {} of training; got log keys: {}".format(epoch, keys))
 
 def train():
     data = []
@@ -83,5 +91,5 @@ def train():
             fill_mode="nearest")
     labels = to_categorical(labels)
 
-    model.fit(aug.flow(data, labels),epochs=50)
+    model.fit(aug.flow(data, labels),epochs=50,callbacks=[CustomCallback()])
     return model
