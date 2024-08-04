@@ -134,7 +134,7 @@ image = image/255
 #prediction
 prediction = new_model.predict(image.reshape(1,IMG_SIZE,IMG_SIZE,CHANNELS))
 index = np.argmax(prediction,axis=1)
-class_name={st.session_state.class1_name} if index==0 else {st.session_state.class2_name}
+class_name='{st.session_state.class1_name}' if index==0 else '{st.session_state.class2_name}'
 confidence_score = prediction[0][index]
 
 #print the result and confidence score
