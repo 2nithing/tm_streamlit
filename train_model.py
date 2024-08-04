@@ -76,7 +76,7 @@ def train():
     # model.add(Dense(64, activation='relu', name='hidden_layer'))
     # model.add(Dropout(0.5))
     # model.add(Dense(2, activation='softmax', name='output'))
-    input_tensor=Input(shape=(IMG_SIZE,IMG_SIZE,CHANNELS))
+    input_tensor=Input(shape=(160,160,3))
     x = feature_extractor_layer(input_tensor)
     x = Flatten()(x)
     x = Dense(16, activation='relu', name='hidden_layer')(x)
