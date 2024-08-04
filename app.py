@@ -4,7 +4,7 @@ import train_model
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.preprocessing.image import load_img
 import numpy as np
-
+#import zipfile
 
 if 'images1' not in st.session_state:
     st.session_state.images1=[]
@@ -28,9 +28,16 @@ selected = option_menu(None, ["Home", "Data", "Train", 'Export'],
     icons=['house', 'cloud-upload', "list-task", 'rocket'], 
     menu_icon="cast", default_index=0, orientation="horizontal")
 
+
+############# Home Tab
+
 if selected == "Home":
     st.title('Create your first ML project')
     st.logo('ultra_final.png')
+
+
+
+########## Data Tab
 
 if selected == "Data":
     col1,col2 = st.columns([1,1])
@@ -61,6 +68,9 @@ if selected == "Data":
         # print(type(st.session_state.images2[0]))
         # print(len(st.session_state.images2))
 
+
+############### Train Tab
+
 if selected == 'Train':
     if st.button('Train Model'):
         st.session_state.progress=0
@@ -84,8 +94,21 @@ if selected == 'Train':
                 pred = st.session_state.model.predict(image.reshape(1,160,160,3))
                 print(np.argmax(pred))
                 if np.argmax(pred)==0:
-                    cont4.write(st.session_state.class1_name)
-                    cont4.progress(round(float(pred[0][0]),0),str(round(float(pred[0][0])*100,2)))
+                    cont4.subheader(st.session_state.class1_name)
+                    cont4.progress(round(float(pred[0][0]),2),f'Confidence Score: {round(float(pred[0][0])*100,2)}%')
                 if np.argmax(pred)==1:
-                    cont4.write(st.session_state.class2_name)
-                    cont4.progress(round(float(pred[0][1]),0),str(round(float(pred[0][1])*100,2)))
+                    cont4.subheader(st.session_state.class2_name)
+                    cont4.progress(round(float(pred[0][1]),2),f'Confidence Score: {round(float(pred[0][1])*100,2)}%')
+
+
+
+################ Export Tab
+
+if selected == "Export":
+    if st.session_state.model:
+        st.session_state.model.save('model.keras')
+        # zipfile.ZipFile('model.zip', mode='w').write("model.keras")
+        with open('model.keras','rb') as f:
+            # st.download_button('Download Model',f,'model.zip',mime="application/zip")
+            st.download_button('Download Model',f,'model.keras')
+            
