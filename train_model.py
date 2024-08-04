@@ -1,5 +1,5 @@
 import streamlit as st
-from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras.applications import MobileNet
 from tensorflow.keras.layers import Input
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.preprocessing.image import load_img
@@ -13,7 +13,7 @@ from tensorflow.keras.utils import to_categorical
 
 @st.cache_resource
 def load_model():
-    feature_extractor_layer = MobileNetV2(weights="imagenet", include_top=False, input_tensor=Input(shape=(160,160,3)))
+    feature_extractor_layer = MobileNet(weights="imagenet", include_top=False, input_tensor=Input(shape=(160,160,3)))
     return feature_extractor_layer
 
 
@@ -73,11 +73,11 @@ def train():
     model = Sequential()
     model.add(feature_extractor_layer)
     model.add(Flatten(name="flatten"))
-    model.add(Dense(1024, activation='relu', name='hidden_layer'))
+    model.add(Dense(64, activation='relu', name='hidden_layer'))
     model.add(Dropout(0.5))
     model.add(Dense(2, activation='softmax', name='output'))
 
-    model.compile(optimizer=Adam(learning_rate=1e-5),loss="categorical_crossentropy",metrics=["accuracy"])
+    model.compile(optimizer=Adam(),loss="categorical_crossentropy",metrics=["accuracy"])
 
 
     aug = ImageDataGenerator(
@@ -90,6 +90,6 @@ def train():
             fill_mode="nearest")
     labels = to_categorical(labels)
 
-    #model.fit(aug.flow(data, labels),epochs=50,callbacks=[CustomCallback()])
-    model.fit(aug.flow(data, labels),epochs=50)
+    model.fit(aug.flow(data, labels),epochs=50,callbacks=[CustomCallback()])
+    # model.fit(aug.flow(data, labels),epochs=50)
     return model
