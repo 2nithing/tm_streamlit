@@ -32,7 +32,7 @@ selected = option_menu(None, ["Home", "Data", "Train", 'Export'],
 ############# Home Tab
 
 if selected == "Home":
-    st.title('Create your first ML project')
+    st.title('Create your own image based ML projects')
     st.logo('Untitled.png')
     st.subheader('How to Use the App')
     st.write("Welcome to our easy-to-use machine learning application builder! Follow these simple steps to create and download your own machine learning model.")
