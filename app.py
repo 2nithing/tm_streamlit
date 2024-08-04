@@ -33,7 +33,7 @@ selected = option_menu(None, ["Home", "Data", "Train", 'Export'],
 
 if selected == "Home":
     st.title('Create your first ML project')
-    st.logo('ultra_final.png')
+    st.logo('Untitled.png')
 
 
 
