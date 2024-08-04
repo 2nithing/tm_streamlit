@@ -1,2 +1,3 @@
 tensorflow
 streamlit_option_menu
+scipy
