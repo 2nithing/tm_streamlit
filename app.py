@@ -74,7 +74,7 @@ if selected == "Data":
 if selected == 'Train':
     if st.button('Train Model'):
         st.session_state.progress=0
-        st.session_state.my_bar = st.progress(0,"Model Training")
+        st.session_state.my_bar = st.progress(0,"Processing training data")
         st.session_state.model = train_model.train()
     if st.session_state.model:
         st.success('Model Trained')
