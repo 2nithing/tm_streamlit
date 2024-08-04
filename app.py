@@ -19,7 +19,7 @@ if 'new_image' not in st.session_state:
 if 'model' not in st.session_state:
     st.session_state.model=''
 st.set_page_config(
-        page_title='Logicbox',
+        page_title='instaML',
         page_icon="🤖",
         layout="wide"
     )
