@@ -13,8 +13,7 @@ from tensorflow.keras.utils import to_categorical
 
 @st.cache_resource
 def load_model():
-    feature_extractor_layer = MobileNetV2(weights="imagenet", include_top=False,
-                                     input_tensor=Input(shape=(160,160,3)))
+    feature_extractor_layer = MobileNetV2(weights="imagenet", include_top=False, input_tensor=Input(shape=(160,160,3)))
     return feature_extractor_layer
 
 
