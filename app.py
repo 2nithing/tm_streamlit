@@ -34,6 +34,28 @@ selected = option_menu(None, ["Home", "Data", "Train", 'Export'],
 if selected == "Home":
     st.title('Create your first ML project')
     st.logo('Untitled.png')
+    st.subheader('How to Use the App')
+    st.write("Welcome to our easy-to-use machine learning application builder! Follow these simple steps to create and download your own machine learning model.")
+
+    st.subheader('1. Data Tab')
+                
+    st.write("""**Upload Your Data:** Start by uploading your dataset. Make sure your data is in a compatible format (e.g., jpg,png).
+
+**Preview Data:** After uploading, you can preview your data to ensure it's loaded correctly.""")
+
+    st.subheader('2. Train Tab')
+
+    st.write("""**Train Your Model:** In this tab, you can click the 'Train' button to train your machine learning model.
+
+**Test Your Model:** After training, you can test the model by uploading new data to see its performance. 
+    """)
+    st.subheader('3. Export Tab')
+
+    st.write("""**Download the Trained Model:** Once satisfied with your trained model, you can download it for future use.
+
+**Get the Code:** Additionally, you can download a Python code snippet that shows how to load and use the trained model in your projects.""")
+
+    st.subheader("""**Enjoy creating powerful machine learning models with just a few clicks!**""")
 
 
 
