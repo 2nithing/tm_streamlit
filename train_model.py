@@ -90,5 +90,6 @@ def train():
             fill_mode="nearest")
     labels = to_categorical(labels)
 
-    model.fit(aug.flow(data, labels),epochs=50,callbacks=[CustomCallback()])
+    #model.fit(aug.flow(data, labels),epochs=50,callbacks=[CustomCallback()])
+    model.fit(aug.flow(data, labels),epochs=50)
     return model
