@@ -1,8 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import train_model
-from tensorflow.keras.preprocessing.image import img_to_array
-from tensorflow.keras.preprocessing.image import load_img
+from tensorflow.keras.preprocessing.image import img_to_array, load_img
 import numpy as np
 
 
@@ -115,8 +114,7 @@ if selected == "Export":
             
     st.write('Code snippet to use your model')
     code = f"""from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import img_to_array
-from tensorflow.keras.preprocessing.image import load_img
+from tensorflow.keras.preprocessing.image import img_to_array,load_img
 import numpy as np
 
 #input image size for the ML model
