@@ -113,3 +113,32 @@ if selected == "Export":
             # st.download_button('Download Model',f,'model.zip',mime="application/zip")
             st.download_button('Download Model',f,'model.keras')
             
+    st.write('Code snippet to use your model')
+    code = f"""from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.preprocessing.image import load_img
+import numpy as np
+
+#input image size for the ML model
+IMG_SIZE = 160
+CHANNELS = 3
+
+#load the trained model and an input image
+new_model = load_model('MODEL FILE PATH/model.keras')
+image = load_img('IMAGE FILE PATH/IMAGE.JPG',target_size=(IMG_SIZE, IMG_SIZE))
+
+#preprocessing
+image = img_to_array(image)
+image = image/255
+
+#prediction
+prediction = new_model.predict(image.reshape(1,IMG_SIZE,IMG_SIZE,CHANNELS))
+index = np.argmax(prediction,axis=1)
+class_name={st.session_state.class1_name} if index==0 else {st.session_state.class2_name}
+confidence_score = prediction[0][index]
+
+#print the result and confidence score
+print('Class:',class_name)
+print('Confifdence Score:',confidence_score)"""
+
+    st.code(code)
