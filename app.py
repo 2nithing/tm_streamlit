@@ -25,7 +25,7 @@ st.set_page_config(
     )
 
 selected = option_menu(None, ["Home", "Data", "Train", 'Export'], 
-    icons=['house', 'cloud-upload', "list-task", 'rocket'], 
+    icons=['house', 'cloud-upload', "gear", 'rocket'], 
     menu_icon="cast", default_index=0, orientation="horizontal")
 
 
