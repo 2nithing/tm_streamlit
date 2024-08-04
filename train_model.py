@@ -9,7 +9,7 @@ from tensorflow.keras.layers import Flatten,Dense,Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.utils import to_categorical
-
+from tensorflow.keras.models import Model
 
 @st.cache_resource
 def load_model():
@@ -70,13 +70,20 @@ def train():
 
     feature_extractor_layer = load_model()
     feature_extractor_layer.trainable = False
-    model = Sequential()
-    model.add(feature_extractor_layer)
-    model.add(Flatten(name="flatten"))
-    model.add(Dense(64, activation='relu', name='hidden_layer'))
-    model.add(Dropout(0.5))
-    model.add(Dense(2, activation='softmax', name='output'))
-
+    # model = Sequential()
+    # model.add(feature_extractor_layer)
+    # model.add(Flatten(name="flatten"))
+    # model.add(Dense(64, activation='relu', name='hidden_layer'))
+    # model.add(Dropout(0.5))
+    # model.add(Dense(2, activation='softmax', name='output'))
+    input_tensor=Input(shape=(IMG_SIZE,IMG_SIZE,CHANNELS))
+    x = feature_extractor_layer(input_tensor)
+    x = Flatten()(x)
+    x = Dense(16, activation='relu', name='hidden_layer')(x)
+    x = Dropout(.5)(x)
+    output = Dense(2, activation='softmax', name='output')(x)
+    
+    model = Model(inputs=input_tensor,outputs=output)
     model.compile(optimizer=Adam(),loss="categorical_crossentropy",metrics=["accuracy"])
 
 
