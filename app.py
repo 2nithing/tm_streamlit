@@ -70,7 +70,7 @@ if selected == "Data":
     if class1_name: 
         st.session_state.class1_name = class1_name
     class_title1 = class1_name if class1_name else ""
-    images1 = cont1.file_uploader(f"Upload {class_title1} images",accept_multiple_files=True,type=['png','jpg','jpeg'],key='files1')
+    images1 = cont1.file_uploader(f"Upload {class_title1} images",accept_multiple_files=True,type=['png','jpg','jpeg','jfif'],key='files1')
     if images1: st.session_state.images1 = images1
     if st.session_state.images1: 
         cont1.write(f'{len(st.session_state.images1)} images uploaded')
@@ -82,7 +82,7 @@ if selected == "Data":
     class2_name = cont2.text_input("Class name",key='class2',value=st.session_state.class2_name)
     if class2_name: 
         st.session_state.class2_name = class2_name
-    images2 = cont2.file_uploader(f"Upload {st.session_state.class2_name} images",accept_multiple_files=True,type=['png','jpg','jpeg'],key='files2')
+    images2 = cont2.file_uploader(f"Upload {st.session_state.class2_name} images",accept_multiple_files=True,type=['png','jpg','jpeg','jfif'],key='files2')
     if images2: st.session_state.images2 = images2
     if st.session_state.images2: 
         cont2.write(f'{len(st.session_state.images2)} images uploaded')
